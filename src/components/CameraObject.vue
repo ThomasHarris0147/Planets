@@ -15,7 +15,7 @@ const lookAt = ref([0, 0, 0])
 const PlanetsInfoServiceInstance = PlanetsInfoService.getInstance()
 const PlanetPos = ref([0, 0, 0])
 const { onAfterRender } = useLoop()
-// TODO: fix this ugly ass code
+// TODO: refactor this ugly ass code
 onAfterRender(({ delta, elapsed }) => {
   const PlanetPos = PlanetsInfoServiceInstance.get(props.planetName)
   if (PlanetPos && props.turnOnPlanetZoom) {
@@ -25,7 +25,7 @@ onAfterRender(({ delta, elapsed }) => {
       new Vector3(newCameraPos[1], newCameraPos[2], newCameraPos[3])
     )
     console.log(distanceRes)
-    if (distanceRes <= 20) {
+    if (distanceRes <= 50) {
       cameraPosition = newCameraPos
       lookAt.value = PlanetPos
     } else {
