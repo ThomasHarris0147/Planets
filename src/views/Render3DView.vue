@@ -8,7 +8,7 @@ import CameraObject from '../components/CameraObject.vue'
 import AllPlanets from '../components/AllPlanets.vue'
 import { ref } from 'vue'
 const gl = {
-  shadows: true,
+  shadows: false,
   alpha: true,
   shadowMapType: BasicShadowMap,
   outputColorSpace: SRGBColorSpace,
@@ -43,7 +43,7 @@ defineExpose({
 })
 </script>
 <template>
-  <TresCanvas :background="texture" window-size v-bind="gl">
+  <TresCanvas window-size v-bind="gl">
     <CameraObject
       :planetName="planetToZoomInto"
       :turnOnPlanetZoom="zoomInOnPlanet"
@@ -55,7 +55,7 @@ defineExpose({
     <Suspense>
       <AllPlanets ref="allPlanetsRef" />
     </Suspense>
-    <TresAmbientLight :intensity="0.5" />
+    <TresAmbientLight :intensity="5" />
     <TresPointLight :position="[1, 0, 0]" :intensity="50" :decay="0.8" cast-shadow />
   </TresCanvas>
 </template>

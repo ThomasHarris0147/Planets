@@ -2,8 +2,7 @@
 import { normalize, distance } from '../helpers/HelperFunctions'
 import PlanetsInfoService from '../stores/PlanetsInfoService'
 import { useLoop } from '@tresjs/core'
-import { onMounted, ref } from 'vue'
-import { gsap } from 'gsap'
+import { ref } from 'vue'
 import { Vector3 } from 'three'
 const props = defineProps({
   planetName: { type: String, required: true, default: 'Earth' },
@@ -13,7 +12,6 @@ const props = defineProps({
 var cameraPosition = [0, 0, 120]
 const lookAt = ref([0, 0, 0])
 const PlanetsInfoServiceInstance = PlanetsInfoService.getInstance()
-const PlanetPos = ref([0, 0, 0])
 const { onAfterRender } = useLoop()
 // TODO: refactor this ugly ass code
 onAfterRender(({ delta, elapsed }) => {
@@ -24,7 +22,6 @@ onAfterRender(({ delta, elapsed }) => {
       new Vector3(cameraPosition[0], cameraPosition[1], cameraPosition[2]),
       new Vector3(newCameraPos[1], newCameraPos[2], newCameraPos[3])
     )
-    console.log(distanceRes)
     if (distanceRes <= 50) {
       cameraPosition = newCameraPos
       lookAt.value = PlanetPos

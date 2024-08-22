@@ -21,7 +21,7 @@ const { scene, materials } = await useGLTF(props.path, {
 })
 const envTexture = new THREE.TextureLoader().load(props.envPath)
 const envGeometry = new THREE.SphereGeometry(props.envScale, 40, 40)
-const envMaterial = new THREE.MeshToonMaterial({
+const envMaterial = new THREE.MeshBasicMaterial({
   map: envTexture,
   transparent: true
 })
