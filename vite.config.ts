@@ -1,12 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
-export default defineConfig((env) => {
-  return {
+export default (env: ConfigEnv) => {
+  return defineConfig({
     base: env.mode === 'production' ? '/planets/' : '/',
     build: {
       minify: false
@@ -17,5 +17,5 @@ export default defineConfig((env) => {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     }
-  }
-})
+  })
+}

@@ -2,6 +2,7 @@
 // @ts-ignore
 import { ref } from 'vue'
 import PlanetObject from './PlanetObject.vue'
+// TODO: instead of manually inputting in the planets, load it with a json file
 const orbitPlanets = ref(true)
 
 const earthSize = ref(1)
@@ -13,6 +14,32 @@ const turnOffMercury = ref(false)
 const turnOffJupiter = ref(false)
 const turnOffSaturn = ref(false)
 const turnOffNeptune = ref(false)
+
+const earthPath = ref('/Planets/Earth Like Planet.glb')
+const sunEnvPath = ref('/Planets/Environment/sun_map.jpg')
+const mercuryPath = ref('/Planets/Hot Planet.glb')
+const earthEnvPath = ref('/Planets/Environment/small-world-clouds.png')
+const jupiterPath = ref('/Planets/Two Ring Planet.glb')
+const saturnPath = ref('/Planets/One Ring Planet.glb')
+const neptunePath = ref('/Planets/Cold Planet.glb')
+const allPlanets = [
+  earthPath,
+  sunEnvPath,
+  mercuryPath,
+  earthEnvPath,
+  jupiterPath,
+  saturnPath,
+  neptunePath
+]
+if (import.meta.env.VITE_APP_MODE == 'production') {
+  for (let planetRef in allPlanets) {
+    allPlanets[planetRef].value = '/planets' + allPlanets[planetRef].value
+  }
+}
+
+for (let planetRef in allPlanets) {
+  console.log(allPlanets[planetRef].value)
+}
 
 const freezePlanets = () => {
   orbitPlanets.value = false
@@ -92,8 +119,8 @@ defineExpose({
       ref="sunRef"
       name="Sun"
       :position="[0, 0, 0]"
-      path="/Planets/Earth Like Planet.glb"
-      envPath="/Planets/Environment/sun_map.jpg"
+      :path="earthPath"
+      :envPath="sunEnvPath"
       envScale="5"
       envRotation="0.3"
       planetScale="1"
@@ -107,7 +134,7 @@ defineExpose({
       ref="mercuryRef"
       name="Mercury"
       :position="[10, 0, 0]"
-      path="/Planets/Hot Planet.glb"
+      :path="mercuryPath"
       planetScale="0.5"
       speedUp="2"
       :orbit="orbitPlanets"
@@ -120,8 +147,8 @@ defineExpose({
       ref="earthRef"
       name="Earth"
       :position="[20, 0, 0]"
-      path="/Planets/Earth Like Planet.glb"
-      envPath="/Planets/Environment/small-world-clouds.png"
+      :path="earthPath"
+      :envPath="earthEnvPath"
       :envScale="earthEnvSize"
       envRotation="0.2"
       :planetScale="earthSize"
@@ -135,7 +162,7 @@ defineExpose({
       ref="jupiterRef"
       name="Jupiter"
       :position="[30, 0, 0]"
-      path="/Planets/Two Ring Planet.glb"
+      :path="jupiterPath"
       planetScale="1"
       speedUp="0.5"
       :orbit="orbitPlanets"
@@ -148,7 +175,7 @@ defineExpose({
       ref="saturnRef"
       name="Saturn"
       :position="[40, 0, 0]"
-      path="/Planets/One Ring Planet.glb"
+      :path="saturnPath"
       planetScale="2"
       planetRotation="0.2"
       speedUp="0.2"
@@ -162,7 +189,7 @@ defineExpose({
       ref="neptuneRef"
       name="Neptune"
       :position="[50, 0, 0]"
-      path="/Planets/Cold Planet.glb"
+      :path="neptunePath"
       planetScale="1"
       planetRotation="0.8"
       speedUp="0.1"

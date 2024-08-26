@@ -1,7 +1,9 @@
 <script setup lang="ts">
 // @ts-ignore
 import AboutMeText from './components/AboutMeText.vue'
+// @ts-ignore
 import BlogView from './components/BlogView.vue'
+// @ts-ignore
 import ProjectsView from './components/ProjectsView.vue'
 // @ts-ignore
 import Render3DView from '@/views/Render3DView.vue'
