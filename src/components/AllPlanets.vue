@@ -3,19 +3,70 @@
 import { ref } from 'vue'
 import PlanetObject from './PlanetObject.vue'
 const orbitPlanets = ref(true)
+
+const turnOffSun = ref(false)
+const turnOffEarth = ref(false)
+const turnOffMercury = ref(false)
+const turnOffSaturn = ref(false)
+const turnOffNeptune = ref(false)
+
 const freezePlanets = () => {
   orbitPlanets.value = false
 }
 const startPlanets = () => {
   orbitPlanets.value = true
 }
-defineExpose({ freezePlanets, startPlanets })
+function turnOnAllPlanets() {
+  turnOffEarth.value = false
+  turnOffMercury.value = false
+  turnOffSaturn.value = false
+  turnOffNeptune.value = false
+  turnOffSun.value = false
+}
+function isolatePlanet(planetName) {
+  switch (planetName) {
+    case 'Earth':
+      turnOffSun.value=true
+      turnOffMercury.value=true
+      turnOffSaturn.value=true
+      turnOffNeptune.value=true
+      break
+    case 'Mercury':
+      turnOffSun.value=true
+      turnOffEarth.value=true
+      turnOffSaturn.value=true
+      turnOffNeptune.value=true
+      break
+    case 'Saturn':
+      turnOffSun.value=true
+      turnOffEarth.value=true
+      turnOffMercury.value=true
+      turnOffNeptune.value=true
+      break
+    case 'Neptune':
+      turnOffSun.value=true
+      turnOffEarth.value=true
+      turnOffMercury.value=true
+      turnOffSaturn.value=true
+      break
+    case 'Sun':
+      turnOffEarth.value=true
+      turnOffMercury.value=true
+      turnOffSaturn.value=true
+      turnOffNeptune.value=true
+      break
+    default:
+      break
+  }
+}
+defineExpose({ freezePlanets, startPlanets, turnOnAllPlanets, isolatePlanet })
 </script>
 
 <template>
   <Suspense>
     <!-- Sun -->
     <PlanetObject
+      v-if="!turnOffSun"
       ref="sunRef"
       name="Sun"
       :position="[0, 0, 0]"
@@ -30,6 +81,7 @@ defineExpose({ freezePlanets, startPlanets })
   <Suspense>
     <!-- Earth -->
     <PlanetObject
+      v-if="!turnOffEarth"
       ref="earthRef"
       name="Earth"
       :position="[20, 0, 0]"
@@ -43,6 +95,7 @@ defineExpose({ freezePlanets, startPlanets })
   <Suspense>
     <!-- Mercury -->
     <PlanetObject
+      v-if="!turnOffMercury"
       ref="mercuryRef"
       name="Mercury"
       :position="[10, 0, 0]"
@@ -55,6 +108,7 @@ defineExpose({ freezePlanets, startPlanets })
   <Suspense>
     <!-- Saturn -->
     <PlanetObject
+      v-if="!turnOffSaturn"
       ref="saturnRef"
       name="Saturn"
       :position="[40, 0, 0]"
@@ -68,6 +122,7 @@ defineExpose({ freezePlanets, startPlanets })
   <Suspense>
     <!-- Neptune -->
     <PlanetObject
+      v-if="!turnOffNeptune"
       ref="neptuneRef"
       name="Neptune"
       :position="[50, 0, 0]"

@@ -34,12 +34,23 @@ const freezePlanets = () => {
 const startPlanets = () => {
   allPlanetsRef.value.startPlanets()
 }
+const turnOnAllPlanets = () => {
+  allPlanetsRef.value.turnOnAllPlanets()
+}
+const isolatePlanet = (planetName: string) => {
+  allPlanetsRef.value.isolatePlanet(planetName)
+}
+const isolateEarth = () => {
+  isolatePlanet('Earth')
+}
 defineExpose({
   cameraPlanetZoomIn,
   cameraPlanetZoomOut,
   setPlanetFocus,
   freezePlanets,
-  startPlanets
+  startPlanets,
+  isolatePlanet,
+  turnOnAllPlanets
 })
 </script>
 <template>
@@ -48,6 +59,7 @@ defineExpose({
       :planetName="planetToZoomInto"
       :turnOnPlanetZoom="zoomInOnPlanet"
       :planetZoomOffset="30"
+      :isolateEarthFunction="isolateEarth"
       ref="cameraRef"
     />
     <!-- <OrbitControls /> -->

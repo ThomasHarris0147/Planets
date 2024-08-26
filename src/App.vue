@@ -18,6 +18,12 @@ const freezePlanets = () => {
 const startPlanets = () => {
   render3d.value.startPlanets()
 }
+const turnOnAllPlanets = () => {
+  render3d.value.turnOnAllPlanets()
+}
+const isolatePlanet = (planetName: string) => {
+  render3d.value.isolatePlanet(planetName)
+}
 const aboutMe = () => {
   freezePlanets()
   cameraPlanetZoomIn()
@@ -26,6 +32,7 @@ const aboutMe = () => {
 const goBack = () => {
   startPlanets()
   cameraPlanetZoomOut()
+  turnOnAllPlanets()
   viewAboutMeText.value = false
 }
 </script>

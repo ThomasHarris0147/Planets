@@ -7,7 +7,8 @@ import { Vector3 } from 'three'
 const props = defineProps({
   planetName: { type: String, required: true, default: 'Earth' },
   planetZoomOffset: { type: Number, required: false, default: 30 },
-  turnOnPlanetZoom: { type: Boolean, required: true, default: false }
+  turnOnPlanetZoom: { type: Boolean, required: true, default: false },
+  isolateEarthFunction: { type: Function, required: true }
 })
 var cameraPosition = [0, 0, 120]
 const lookAt = ref([0, 0, 0])
@@ -25,6 +26,7 @@ onAfterRender(({ delta, elapsed }) => {
     if (distanceRes <= 50) {
       cameraPosition = newCameraPos
       lookAt.value = PlanetPos
+      props.isolateEarthFunction()
     } else {
       const direction = normalize(
         new Vector3(
