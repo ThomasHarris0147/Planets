@@ -18,8 +18,10 @@ const allPlanetsRef = ref()
 const cameraRef = ref()
 const zoomInOnPlanet = ref(false)
 const planetToZoomInto = ref('Earth')
-const setPlanetFocus = (planetName: string) => {
+const planetZoomOffsetNum = ref(30)
+const setPlanetFocus = (planetName: string, planetZoomOffset: number = 30) => {
   planetToZoomInto.value = planetName
+  planetZoomOffsetNum.value = planetZoomOffset
 }
 const cameraPlanetZoomIn = () => {
   zoomInOnPlanet.value = true
@@ -40,8 +42,8 @@ const turnOnAllPlanets = () => {
 const isolatePlanet = (planetName: string) => {
   allPlanetsRef.value.isolatePlanet(planetName)
 }
-const isolateEarth = () => {
-  isolatePlanet('Earth')
+const isolatePlanetFunction = () => {
+  isolatePlanet(planetToZoomInto.value)
 }
 defineExpose({
   cameraPlanetZoomIn,
@@ -58,8 +60,8 @@ defineExpose({
     <CameraObject
       :planetName="planetToZoomInto"
       :turnOnPlanetZoom="zoomInOnPlanet"
-      :planetZoomOffset="30"
-      :isolateEarthFunction="isolateEarth"
+      :planetZoomOffset="planetZoomOffsetNum"
+      :isolatePlanetFunction="isolatePlanetFunction"
       ref="cameraRef"
     />
     <!-- <OrbitControls /> -->

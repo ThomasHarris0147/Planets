@@ -10,6 +10,7 @@ const earthEnvSize = ref(2.1)
 const turnOffSun = ref(false)
 const turnOffEarth = ref(false)
 const turnOffMercury = ref(false)
+const turnOffJupiter = ref(false)
 const turnOffSaturn = ref(false)
 const turnOffNeptune = ref(false)
 
@@ -25,6 +26,7 @@ function turnOnAllPlanets() {
   turnOffSaturn.value = false
   turnOffNeptune.value = false
   turnOffSun.value = false
+  turnOffJupiter.value = false
 }
 function isolatePlanet(planetName) {
   switch (planetName) {
@@ -33,26 +35,38 @@ function isolatePlanet(planetName) {
       turnOffMercury.value = true
       turnOffSaturn.value = true
       turnOffNeptune.value = true
+      turnOffJupiter.value = true
       break
     case 'Mercury':
       turnOffSun.value = true
       turnOffEarth.value = true
       turnOffSaturn.value = true
       turnOffNeptune.value = true
+      turnOffJupiter.value = true
       break
     case 'Saturn':
       turnOffSun.value = true
       turnOffEarth.value = true
       turnOffMercury.value = true
       turnOffNeptune.value = true
+      turnOffJupiter.value = true
       break
     case 'Neptune':
       turnOffSun.value = true
       turnOffEarth.value = true
       turnOffMercury.value = true
       turnOffSaturn.value = true
+      turnOffJupiter.value = true
       break
     case 'Sun':
+      turnOffEarth.value = true
+      turnOffMercury.value = true
+      turnOffSaturn.value = true
+      turnOffNeptune.value = true
+      turnOffJupiter.value = true
+      break
+    case 'Jupiter':
+      turnOffSun.value = true
       turnOffEarth.value = true
       turnOffMercury.value = true
       turnOffSaturn.value = true
@@ -87,6 +101,19 @@ defineExpose({
     />
   </Suspense>
   <Suspense>
+    <!-- Mercury -->
+    <PlanetObject
+      v-if="!turnOffMercury"
+      ref="mercuryRef"
+      name="Mercury"
+      :position="[10, 0, 0]"
+      path="/Planets/Hot Planet.glb"
+      planetScale="0.5"
+      speedUp="2"
+      :orbit="orbitPlanets"
+    />
+  </Suspense>
+  <Suspense>
     <!-- Earth -->
     <PlanetObject
       v-if="!turnOffEarth"
@@ -102,15 +129,15 @@ defineExpose({
     />
   </Suspense>
   <Suspense>
-    <!-- Mercury -->
+    <!-- Jupiter -->
     <PlanetObject
-      v-if="!turnOffMercury"
-      ref="mercuryRef"
-      name="Mercury"
-      :position="[10, 0, 0]"
-      path="/Planets/Hot Planet.glb"
-      planetScale="0.5"
-      speedUp="2"
+      v-if="!turnOffJupiter"
+      ref="jupiterRef"
+      name="Jupiter"
+      :position="[30, 0, 0]"
+      path="/Planets/Two Ring Planet.glb"
+      planetScale="1"
+      speedUp="0.5"
       :orbit="orbitPlanets"
     />
   </Suspense>

@@ -8,7 +8,7 @@ const props = defineProps({
   planetName: { type: String, required: true, default: 'Earth' },
   planetZoomOffset: { type: Number, required: false, default: 30 },
   turnOnPlanetZoom: { type: Boolean, required: true, default: false },
-  isolateEarthFunction: { type: Function, required: true }
+  isolatePlanetFunction: { type: Function, required: true }
 })
 var cameraPosition = [0, 0, 120]
 const lookAt = ref([0, 0, 0])
@@ -23,10 +23,10 @@ onAfterRender(({ delta, elapsed }) => {
       new Vector3(cameraPosition[0], cameraPosition[1], cameraPosition[2]),
       new Vector3(newCameraPos[1], newCameraPos[2], newCameraPos[3])
     )
-    if (distanceRes <= 50) {
+    if (distanceRes <= 60) {
       cameraPosition = newCameraPos
       lookAt.value = PlanetPos
-      props.isolateEarthFunction()
+      props.isolatePlanetFunction()
     } else {
       const direction = normalize(
         new Vector3(

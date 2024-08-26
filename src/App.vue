@@ -6,6 +6,8 @@ import Render3DView from '@/views/Render3DView.vue'
 import { ref } from 'vue'
 const render3d = ref()
 const viewAboutMeText = ref(false)
+const viewBlogsRef = ref(false)
+const viewProjectsRef = ref(false)
 const cameraPlanetZoomIn = () => {
   render3d.value.cameraPlanetZoomIn()
 }
@@ -21,10 +23,26 @@ const startPlanets = () => {
 const turnOnAllPlanets = () => {
   render3d.value.turnOnAllPlanets()
 }
+const setPlanetFocus = (planetName: string, offsetNum: number = 30) => {
+  render3d.value.setPlanetFocus(planetName, offsetNum)
+}
 const isolatePlanet = (planetName: string) => {
   render3d.value.isolatePlanet(planetName)
 }
+const viewBlogs = () => {
+  setPlanetFocus('Jupiter', 35)
+  freezePlanets()
+  cameraPlanetZoomIn()
+  viewBlogsRef.value = true
+}
+const viewProjects = () => {
+  setPlanetFocus('Mercury', 20)
+  freezePlanets()
+  cameraPlanetZoomIn()
+  viewProjectsRef.value = true
+}
 const aboutMe = () => {
+  setPlanetFocus('Earth', 30)
   freezePlanets()
   cameraPlanetZoomIn()
   viewAboutMeText.value = true
@@ -34,18 +52,50 @@ const goBack = () => {
   cameraPlanetZoomOut()
   turnOnAllPlanets()
   viewAboutMeText.value = false
+  viewBlogsRef.value = false
+  viewProjectsRef.value = false
 }
 </script>
 <template>
   <div id="container">
     <div class="background">
-      <Render3DView ref="render3d" :viewAboutMeText="viewAboutMeText" />
+      <Render3DView ref="render3d" />
     </div>
-    <button v-if="!viewAboutMeText" class="button-36" role="button" @click="aboutMe">
+    <button
+      v-if="!viewAboutMeText && !viewBlogsRef && !viewProjectsRef"
+      class="button-36"
+      role="button"
+      @click="aboutMe"
+    >
       About Me
     </button>
-    <button v-if="viewAboutMeText" class="button-36" role="button" @click="goBack">Back</button>
+    <button
+      v-if="!viewBlogsRef && !viewAboutMeText && !viewProjectsRef"
+      class="button-36"
+      role="button"
+      @click="viewBlogs"
+    >
+      Blogs
+    </button>
+    <button
+      v-if="!viewBlogsRef && !viewAboutMeText && !viewProjectsRef"
+      class="button-36"
+      role="button"
+      @click="viewProjects"
+    >
+      Projects
+    </button>
+    <button
+      v-if="viewAboutMeText || viewBlogsRef || viewProjectsRef"
+      class="button-36"
+      role="button"
+      @click="goBack"
+    >
+      Back
+    </button>
     <AboutMeText v-if="viewAboutMeText" />
+    <p v-if="viewBlogsRef">Hello World!</p>
+    <p v-if="viewProjectsRef">Hello Projects!</p>
   </div>
 </template>
 <style scoped>
@@ -73,6 +123,7 @@ const goBack = () => {
   background-image: linear-gradient(92.88deg, #455eb5 9.16%, #5643cc 43.89%, #673fd7 64.72%);
   border-radius: 8px;
   border-style: none;
+  margin: auto 5px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
