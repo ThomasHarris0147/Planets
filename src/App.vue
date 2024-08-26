@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // @ts-ignore
 import AboutMeText from './components/AboutMeText.vue'
+import BlogView from './components/BlogView.vue'
+import ProjectsView from './components/ProjectsView.vue'
 // @ts-ignore
 import Render3DView from '@/views/Render3DView.vue'
 import { ref } from 'vue'
@@ -94,8 +96,8 @@ const goBack = () => {
       Back
     </button>
     <AboutMeText v-if="viewAboutMeText" />
-    <p v-if="viewBlogsRef">Hello World!</p>
-    <p v-if="viewProjectsRef">Hello Projects!</p>
+    <BlogView v-if="viewBlogsRef" />
+    <ProjectsView v-if="viewProjectsRef" />
   </div>
 </template>
 <style scoped>
