@@ -37,10 +37,6 @@ if (import.meta.env.VITE_APP_MODE == 'production') {
   }
 }
 
-for (let planetRef in allPlanets) {
-  console.log(allPlanets[planetRef].value)
-}
-
 const freezePlanets = () => {
   orbitPlanets.value = false
 }
