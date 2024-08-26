@@ -36,9 +36,9 @@ onAfterRender(({ delta, elapsed }) => {
         )
       )
       const newUpdatedCameraPos = [
-        cameraPosition[0] + direction.x * delta * 100,
-        cameraPosition[1] + direction.y * delta * 100,
-        cameraPosition[2] + direction.z * delta * 100
+        cameraPosition[0] + direction.x * delta * 80,
+        cameraPosition[1] + direction.y * delta * 80,
+        cameraPosition[2] + direction.z * delta * 80
       ]
       cameraPosition = newUpdatedCameraPos
       lookAt.value = PlanetPos

@@ -4,6 +4,9 @@ import { ref } from 'vue'
 import PlanetObject from './PlanetObject.vue'
 const orbitPlanets = ref(true)
 
+const earthSize = ref(1)
+const earthEnvSize = ref(2.1)
+
 const turnOffSun = ref(false)
 const turnOffEarth = ref(false)
 const turnOffMercury = ref(false)
@@ -26,40 +29,45 @@ function turnOnAllPlanets() {
 function isolatePlanet(planetName) {
   switch (planetName) {
     case 'Earth':
-      turnOffSun.value=true
-      turnOffMercury.value=true
-      turnOffSaturn.value=true
-      turnOffNeptune.value=true
+      turnOffSun.value = true
+      turnOffMercury.value = true
+      turnOffSaturn.value = true
+      turnOffNeptune.value = true
       break
     case 'Mercury':
-      turnOffSun.value=true
-      turnOffEarth.value=true
-      turnOffSaturn.value=true
-      turnOffNeptune.value=true
+      turnOffSun.value = true
+      turnOffEarth.value = true
+      turnOffSaturn.value = true
+      turnOffNeptune.value = true
       break
     case 'Saturn':
-      turnOffSun.value=true
-      turnOffEarth.value=true
-      turnOffMercury.value=true
-      turnOffNeptune.value=true
+      turnOffSun.value = true
+      turnOffEarth.value = true
+      turnOffMercury.value = true
+      turnOffNeptune.value = true
       break
     case 'Neptune':
-      turnOffSun.value=true
-      turnOffEarth.value=true
-      turnOffMercury.value=true
-      turnOffSaturn.value=true
+      turnOffSun.value = true
+      turnOffEarth.value = true
+      turnOffMercury.value = true
+      turnOffSaturn.value = true
       break
     case 'Sun':
-      turnOffEarth.value=true
-      turnOffMercury.value=true
-      turnOffSaturn.value=true
-      turnOffNeptune.value=true
+      turnOffEarth.value = true
+      turnOffMercury.value = true
+      turnOffSaturn.value = true
+      turnOffNeptune.value = true
       break
     default:
       break
   }
 }
-defineExpose({ freezePlanets, startPlanets, turnOnAllPlanets, isolatePlanet })
+defineExpose({
+  freezePlanets,
+  startPlanets,
+  turnOnAllPlanets,
+  isolatePlanet
+})
 </script>
 
 <template>
@@ -87,8 +95,9 @@ defineExpose({ freezePlanets, startPlanets, turnOnAllPlanets, isolatePlanet })
       :position="[20, 0, 0]"
       path="/Planets/Earth Like Planet.glb"
       envPath="/Planets/Environment/small-world-clouds.png"
-      envScale="2.1"
+      :envScale="earthEnvSize"
       envRotation="0.2"
+      :planetScale="earthSize"
       :orbit="orbitPlanets"
     />
   </Suspense>
