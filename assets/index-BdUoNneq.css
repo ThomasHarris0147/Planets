@@ -1,0 +1,266 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--vt-c-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-1);
+
+  --section-gap: 160px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+  }
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
+
+.background[data-v-06e35c26] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+#container[data-v-06e35c26] {
+  position: fixed;
+  padding-top: 10px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: auto;
+}
+/* CSS */
+.button-36[data-v-06e35c26] {
+  background-image: linear-gradient(92.88deg, #455eb5 9.16%, #5643cc 43.89%, #673fd7 64.72%);
+  border-radius: 8px;
+  border-style: none;
+  margin: auto 5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family:
+    'Inter UI',
+    'SF Pro Display',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all 0.5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.button-36[data-v-06e35c26]:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: 0.1s;
+}
+@media (min-width: 768px) {
+.button-36[data-v-06e35c26] {
+    padding: 0 2.6rem;
+}
+}
+
+p[data-v-47f57c11] {
+  white-space: pre-wrap;
+}
+.textDisplay[data-v-47f57c11] {
+  position: absolute;
+  bottom: 0;
+  width: 30vw;
+  height: 90vh;
+  background: rgba(202, 92, 221, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  border: 2px solid #e8bcf0;
+  animation: fadeIn-47f57c11 5s;
+}
+@keyframes fadeIn-47f57c11 {
+0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+@media screen and (max-width: 750px) {
+.textDisplay[data-v-47f57c11] {
+    width: 100vw;
+}
+}
+
+p[data-v-afe2b26b] {
+  white-space: pre-wrap;
+}
+.textDisplay[data-v-afe2b26b] {
+  position: absolute;
+  bottom: 0;
+  width: 30vw;
+  height: 90vh;
+  background: rgba(202, 92, 221, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  border: 2px solid #e8bcf0;
+  animation: fadeIn-afe2b26b 5s;
+}
+@keyframes fadeIn-afe2b26b {
+0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+@media screen and (max-width: 750px) {
+.textDisplay[data-v-afe2b26b] {
+    width: 100vw;
+}
+}
+
+p[data-v-46cae743] {
+  white-space: pre-wrap;
+}
+.textDisplay[data-v-46cae743] {
+  position: absolute;
+  bottom: 0;
+  width: 30vw;
+  height: 90vh;
+  background: rgba(202, 92, 221, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  border: 2px solid #e8bcf0;
+  animation: fadeIn-46cae743 5s;
+}
+@keyframes fadeIn-46cae743 {
+0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+@media screen and (max-width: 750px) {
+.textDisplay[data-v-46cae743] {
+    width: 100vw;
+}
+}
