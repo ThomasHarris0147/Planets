@@ -3,7 +3,8 @@ import * as THREE from 'three'
 import { useGLTF } from '@tresjs/cientos'
 import { ref, shallowRef } from 'vue'
 import { useRenderLoop } from '@tresjs/core'
-import PlanetsInfoService from '../stores/PlanetsInfoService'
+import { usePlanetStore } from '../stores/PlanetStore'
+const planetStore = usePlanetStore()
 const props = defineProps({
   name: { type: String, required: true },
   position: { type: Array, required: true },
@@ -31,7 +32,6 @@ const planetRef = ref('planetRef')
 const envRef = shallowRef()
 const groupRef = ref('groupRef')
 
-const PlanetsInfoServiceInstance = PlanetsInfoService.getInstance()
 const { onBeforeLoop } = useRenderLoop()
 var time = 0
 onBeforeLoop(({ elapsed, delta }) => {
@@ -56,11 +56,7 @@ onBeforeLoop(({ elapsed, delta }) => {
       scene.position.x = props.position[0] * Math.sin(time * props.speedUp) - props.position[0]
       scene.position.y = props.position[0] * Math.cos(time * props.speedUp)
     }
-    PlanetsInfoServiceInstance.set(props.name, [
-      scene.position.x,
-      scene.position.y,
-      scene.position.z
-    ])
+    planetStore.setPlanetsLoc(props.name, [scene.position.x, scene.position.y, scene.position.z])
   }
 })
 </script>

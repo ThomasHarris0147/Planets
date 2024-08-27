@@ -1,105 +1,51 @@
 <script setup lang="ts">
 // @ts-ignore
-import AboutMeText from './components/AboutMeText.vue'
-// @ts-ignore
-import BlogView from './components/BlogView.vue'
-// @ts-ignore
-import ProjectsView from './components/ProjectsView.vue'
-// @ts-ignore
 import Render3DView from '@/views/Render3DView.vue'
 import { ref } from 'vue'
+import { usePlanetStore } from './stores/PlanetStore'
+const planetStore = usePlanetStore()
 const render3d = ref()
-const viewAboutMeText = ref(false)
-const viewBlogsRef = ref(false)
-const viewProjectsRef = ref(false)
-const cameraPlanetZoomIn = () => {
-  render3d.value.cameraPlanetZoomIn()
-}
-const cameraPlanetZoomOut = () => {
-  render3d.value.cameraPlanetZoomOut()
-}
-const freezePlanets = () => {
-  render3d.value.freezePlanets()
-}
-const startPlanets = () => {
-  render3d.value.startPlanets()
-}
-const turnOnAllPlanets = () => {
-  render3d.value.turnOnAllPlanets()
-}
+const buttonClicked = ref(false)
 const setPlanetFocus = (planetName: string, offsetNum: number = 30) => {
   render3d.value.setPlanetFocus(planetName, offsetNum)
 }
-const isolatePlanet = (planetName: string) => {
-  render3d.value.isolatePlanet(planetName)
-}
 const viewBlogs = () => {
   setPlanetFocus('Jupiter', 35)
-  freezePlanets()
-  cameraPlanetZoomIn()
-  viewBlogsRef.value = true
+  planetStore.freezePlanets()
+  buttonClicked.value = true
 }
 const viewProjects = () => {
   setPlanetFocus('Mercury', 20)
-  freezePlanets()
-  cameraPlanetZoomIn()
-  viewProjectsRef.value = true
+  planetStore.freezePlanets()
+  buttonClicked.value = true
 }
 const aboutMe = () => {
   setPlanetFocus('Earth', 30)
-  freezePlanets()
-  cameraPlanetZoomIn()
-  viewAboutMeText.value = true
+  planetStore.freezePlanets()
+  buttonClicked.value = true
 }
 const goBack = () => {
-  startPlanets()
-  cameraPlanetZoomOut()
-  turnOnAllPlanets()
-  viewAboutMeText.value = false
-  viewBlogsRef.value = false
-  viewProjectsRef.value = false
+  planetStore.startPlanets()
+  render3d.value.turnOnAllPlanets()
+  buttonClicked.value = false
 }
 </script>
 <template>
   <div id="container">
     <div class="background">
-      <Render3DView ref="render3d" />
+      <Render3DView ref="render3d" :zoomInOnPlanet="buttonClicked" />
     </div>
-    <button
-      v-if="!viewAboutMeText && !viewBlogsRef && !viewProjectsRef"
-      class="button-36"
-      role="button"
-      @click="aboutMe"
-    >
-      About Me
-    </button>
-    <button
-      v-if="!viewBlogsRef && !viewAboutMeText && !viewProjectsRef"
-      class="button-36"
-      role="button"
-      @click="viewBlogs"
-    >
-      Blogs
-    </button>
-    <button
-      v-if="!viewBlogsRef && !viewAboutMeText && !viewProjectsRef"
-      class="button-36"
-      role="button"
-      @click="viewProjects"
-    >
-      Projects
-    </button>
-    <button
-      v-if="viewAboutMeText || viewBlogsRef || viewProjectsRef"
-      class="button-36"
-      role="button"
-      @click="goBack"
-    >
+    <nav v-if="!buttonClicked">
+      <RouterLink to="/about" class="button-36" role="button" @click="aboutMe">About Me</RouterLink>
+      <RouterLink to="/blogs" class="button-36" role="button" @click="viewBlogs">Blogs</RouterLink>
+      <RouterLink to="/projects" class="button-36" role="button" @click="viewProjects">
+        Projects
+      </RouterLink>
+    </nav>
+    <RouterLink to="/" v-if="buttonClicked" class="button-36" role="button" @click="goBack">
       Back
-    </button>
-    <AboutMeText v-if="viewAboutMeText" />
-    <BlogView v-if="viewBlogsRef" />
-    <ProjectsView v-if="viewProjectsRef" />
+    </RouterLink>
+    <RouterView />
   </div>
 </template>
 <style scoped>
@@ -114,6 +60,7 @@ const goBack = () => {
 }
 #container {
   position: fixed;
+  padding-top: 10px;
   top: 0;
   left: 0;
   bottom: 0;

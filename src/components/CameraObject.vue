@@ -1,9 +1,10 @@
 <script setup>
 import { normalize, distance } from '../helpers/HelperFunctions'
-import PlanetsInfoService from '../stores/PlanetsInfoService'
 import { useLoop } from '@tresjs/core'
 import { ref } from 'vue'
 import { Vector3 } from 'three'
+import { usePlanetStore } from '../stores/PlanetStore'
+const planetStore = usePlanetStore()
 const props = defineProps({
   planetName: { type: String, required: true, default: 'Earth' },
   planetZoomOffset: { type: Number, required: false, default: 30 },
@@ -12,11 +13,10 @@ const props = defineProps({
 })
 var cameraPosition = [0, 0, 120]
 const lookAt = ref([0, 0, 0])
-const PlanetsInfoServiceInstance = PlanetsInfoService.getInstance()
 const { onAfterRender } = useLoop()
 // TODO: refactor this ugly ass code
 onAfterRender(({ delta, elapsed }) => {
-  const PlanetPos = PlanetsInfoServiceInstance.get(props.planetName)
+  const PlanetPos = planetStore.getPlanetsLoc(props.planetName)
   if (PlanetPos && props.turnOnPlanetZoom) {
     const newCameraPos = [PlanetPos[0] + props.planetZoomOffset, PlanetPos[1], PlanetPos[2]]
     const distanceRes = distance(

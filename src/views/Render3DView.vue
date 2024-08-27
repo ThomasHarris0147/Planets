@@ -7,6 +7,9 @@ import CameraObject from '../components/CameraObject.vue'
 // @ts-ignore
 import AllPlanets from '../components/AllPlanets.vue'
 import { ref } from 'vue'
+const props = defineProps({
+  zoomInOnPlanet: { type: Boolean, required: false, default: false }
+})
 const gl = {
   shadows: false,
   alpha: true,
@@ -16,42 +19,20 @@ const gl = {
 }
 const allPlanetsRef = ref()
 const cameraRef = ref()
-const zoomInOnPlanet = ref(false)
 const planetToZoomInto = ref('Earth')
 const planetZoomOffsetNum = ref(30)
 const setPlanetFocus = (planetName: string, planetZoomOffset: number = 30) => {
   planetToZoomInto.value = planetName
   planetZoomOffsetNum.value = planetZoomOffset
 }
-const cameraPlanetZoomIn = () => {
-  zoomInOnPlanet.value = true
-}
-
-const cameraPlanetZoomOut = () => {
-  zoomInOnPlanet.value = false
-}
-const freezePlanets = () => {
-  allPlanetsRef.value.freezePlanets()
-}
-const startPlanets = () => {
-  allPlanetsRef.value.startPlanets()
-}
 const turnOnAllPlanets = () => {
   allPlanetsRef.value.turnOnAllPlanets()
 }
-const isolatePlanet = (planetName: string) => {
-  allPlanetsRef.value.isolatePlanet(planetName)
-}
 const isolatePlanetFunction = () => {
-  isolatePlanet(planetToZoomInto.value)
+  allPlanetsRef.value.isolatePlanet(planetToZoomInto.value)
 }
 defineExpose({
-  cameraPlanetZoomIn,
-  cameraPlanetZoomOut,
   setPlanetFocus,
-  freezePlanets,
-  startPlanets,
-  isolatePlanet,
   turnOnAllPlanets
 })
 </script>
@@ -59,7 +40,7 @@ defineExpose({
   <TresCanvas window-size v-bind="gl">
     <CameraObject
       :planetName="planetToZoomInto"
-      :turnOnPlanetZoom="zoomInOnPlanet"
+      :turnOnPlanetZoom="props.zoomInOnPlanet"
       :planetZoomOffset="planetZoomOffsetNum"
       :isolatePlanetFunction="isolatePlanetFunction"
       ref="cameraRef"

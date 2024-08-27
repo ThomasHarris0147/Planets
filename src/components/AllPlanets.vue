@@ -2,106 +2,30 @@
 // @ts-ignore
 import { ref } from 'vue'
 import PlanetObject from './PlanetObject.vue'
-// TODO: instead of manually inputting in the planets, load it with a json file
-const orbitPlanets = ref(true)
+import { planets } from './PlanetConfig'
+import { usePlanetStore } from '../stores/PlanetStore'
+const planetStore = usePlanetStore()
 
-const earthSize = ref(1)
-const earthEnvSize = ref(2.1)
-
-const turnOffSun = ref(false)
-const turnOffEarth = ref(false)
-const turnOffMercury = ref(false)
-const turnOffJupiter = ref(false)
-const turnOffSaturn = ref(false)
-const turnOffNeptune = ref(false)
-
-const earthPath = ref('/Planets/Earth Like Planet.glb')
-const sunEnvPath = ref('/Planets/Environment/sun_map.jpg')
-const mercuryPath = ref('/Planets/Hot Planet.glb')
-const earthEnvPath = ref('/Planets/Environment/small-world-clouds.png')
-const jupiterPath = ref('/Planets/Two Ring Planet.glb')
-const saturnPath = ref('/Planets/One Ring Planet.glb')
-const neptunePath = ref('/Planets/Cold Planet.glb')
-const allPlanets = [
-  earthPath,
-  sunEnvPath,
-  mercuryPath,
-  earthEnvPath,
-  jupiterPath,
-  saturnPath,
-  neptunePath
-]
+const allPlanets = ref(planets)
 if (import.meta.env.VITE_APP_MODE == 'production') {
-  for (let planetRef in allPlanets) {
-    allPlanets[planetRef].value = '/planets' + allPlanets[planetRef].value
+  for (let planet in allPlanets.value) {
+    // for some reason base: '/planets/' is not replacing the path here.
+    // so Im doing it manually
+    allPlanets.value[planet].path = '/planets' + allPlanets.value[planet].path
   }
 }
 
-const freezePlanets = () => {
-  orbitPlanets.value = false
-}
-const startPlanets = () => {
-  orbitPlanets.value = true
-}
 function turnOnAllPlanets() {
-  turnOffEarth.value = false
-  turnOffMercury.value = false
-  turnOffSaturn.value = false
-  turnOffNeptune.value = false
-  turnOffSun.value = false
-  turnOffJupiter.value = false
+  allPlanets.value = planets
 }
 function isolatePlanet(planetName) {
-  switch (planetName) {
-    case 'Earth':
-      turnOffSun.value = true
-      turnOffMercury.value = true
-      turnOffSaturn.value = true
-      turnOffNeptune.value = true
-      turnOffJupiter.value = true
-      break
-    case 'Mercury':
-      turnOffSun.value = true
-      turnOffEarth.value = true
-      turnOffSaturn.value = true
-      turnOffNeptune.value = true
-      turnOffJupiter.value = true
-      break
-    case 'Saturn':
-      turnOffSun.value = true
-      turnOffEarth.value = true
-      turnOffMercury.value = true
-      turnOffNeptune.value = true
-      turnOffJupiter.value = true
-      break
-    case 'Neptune':
-      turnOffSun.value = true
-      turnOffEarth.value = true
-      turnOffMercury.value = true
-      turnOffSaturn.value = true
-      turnOffJupiter.value = true
-      break
-    case 'Sun':
-      turnOffEarth.value = true
-      turnOffMercury.value = true
-      turnOffSaturn.value = true
-      turnOffNeptune.value = true
-      turnOffJupiter.value = true
-      break
-    case 'Jupiter':
-      turnOffSun.value = true
-      turnOffEarth.value = true
-      turnOffMercury.value = true
-      turnOffSaturn.value = true
-      turnOffNeptune.value = true
-      break
-    default:
-      break
+  for (let planet in allPlanets.value) {
+    if (allPlanets.value[planet] !== undefined && allPlanets.value[planet].name == planetName) {
+      allPlanets.value = [allPlanets.value[planet]]
+    }
   }
 }
 defineExpose({
-  freezePlanets,
-  startPlanets,
   turnOnAllPlanets,
   isolatePlanet
 })
@@ -109,87 +33,11 @@ defineExpose({
 
 <template>
   <Suspense>
-    <!-- Sun -->
     <PlanetObject
-      v-if="!turnOffSun"
-      ref="sunRef"
-      name="Sun"
-      :position="[0, 0, 0]"
-      :path="earthPath"
-      :envPath="sunEnvPath"
-      envScale="5"
-      envRotation="0.3"
-      planetScale="1"
-      :orbit="orbitPlanets"
-    />
-  </Suspense>
-  <Suspense>
-    <!-- Mercury -->
-    <PlanetObject
-      v-if="!turnOffMercury"
-      ref="mercuryRef"
-      name="Mercury"
-      :position="[10, 0, 0]"
-      :path="mercuryPath"
-      planetScale="0.5"
-      speedUp="2"
-      :orbit="orbitPlanets"
-    />
-  </Suspense>
-  <Suspense>
-    <!-- Earth -->
-    <PlanetObject
-      v-if="!turnOffEarth"
-      ref="earthRef"
-      name="Earth"
-      :position="[20, 0, 0]"
-      :path="earthPath"
-      :envPath="earthEnvPath"
-      :envScale="earthEnvSize"
-      envRotation="0.2"
-      :planetScale="earthSize"
-      :orbit="orbitPlanets"
-    />
-  </Suspense>
-  <Suspense>
-    <!-- Jupiter -->
-    <PlanetObject
-      v-if="!turnOffJupiter"
-      ref="jupiterRef"
-      name="Jupiter"
-      :position="[30, 0, 0]"
-      :path="jupiterPath"
-      planetScale="1"
-      speedUp="0.5"
-      :orbit="orbitPlanets"
-    />
-  </Suspense>
-  <Suspense>
-    <!-- Saturn -->
-    <PlanetObject
-      v-if="!turnOffSaturn"
-      ref="saturnRef"
-      name="Saturn"
-      :position="[40, 0, 0]"
-      :path="saturnPath"
-      planetScale="2"
-      planetRotation="0.2"
-      speedUp="0.2"
-      :orbit="orbitPlanets"
-    />
-  </Suspense>
-  <Suspense>
-    <!-- Neptune -->
-    <PlanetObject
-      v-if="!turnOffNeptune"
-      ref="neptuneRef"
-      name="Neptune"
-      :position="[50, 0, 0]"
-      :path="neptunePath"
-      planetScale="1"
-      planetRotation="0.8"
-      speedUp="0.1"
-      :orbit="orbitPlanets"
+      v-for="planet in allPlanets"
+      :key="planet.name"
+      v-bind="planet"
+      :orbit="planetStore.orbit"
     />
   </Suspense>
 </template>
