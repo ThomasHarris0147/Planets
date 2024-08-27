@@ -17,7 +17,6 @@ if (import.meta.env.VITE_APP_MODE == 'production') {
   }
 }
 const allPlanets = ref(defaultPlanets)
-console.log(allPlanets.value)
 function turnOnAllPlanets() {
   allPlanets.value = defaultPlanets
 }

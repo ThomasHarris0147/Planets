@@ -62,7 +62,7 @@ onBeforeLoop(({ elapsed, delta }) => {
 </script>
 <template>
   <TresGroup :position="props.position" ref="groupRef">
-    <primitive ref="envRef" :object="env" />
+    <primitive v-if="props.envPath" ref="envRef" :object="env" />
     <primitive ref="planetRef" :object="scene" :material="materials[0]" cast-shadow />
   </TresGroup>
 </template>
