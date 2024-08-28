@@ -52427,7 +52427,7 @@ const _sfc_main$6 = {
     position: { type: Array, required: true },
     path: { type: String, required: true },
     planetScale: { type: Number, required: false, default: 1 },
-    envPath: { type: String, required: false },
+    envPath: { type: String, required: false, default: void 0 },
     envScale: { type: Number, required: false, default: 1 },
     envRotation: { type: Number, required: false, default: 1 },
     planetRotation: { type: Number, required: false, default: 0.08 },
@@ -52441,14 +52441,17 @@ const _sfc_main$6 = {
     const { scene, materials } = ([__temp, __restore] = withAsyncContext(() => wf(props.path, {
       draco: true
     })), __temp = await __temp, __restore(), __temp);
-    const envTexture = new TextureLoader().load(props.envPath);
-    const envGeometry = new SphereGeometry(props.envScale, 40, 40);
-    const envMaterial = new MeshBasicMaterial({
-      map: envTexture,
-      transparent: true
-    });
+    var env = void 0;
+    if (props.envPath !== void 0) {
+      const envTexture = new TextureLoader().load(props.envPath);
+      const envGeometry = new SphereGeometry(props.envScale, 40, 40);
+      const envMaterial = new MeshBasicMaterial({
+        map: envTexture,
+        transparent: true
+      });
+      env = new Mesh(envGeometry, envMaterial);
+    }
     scene.scale.set(props.planetScale, props.planetScale, props.planetScale);
-    const env = new Mesh(envGeometry, envMaterial);
     const planetRef = ref("planetRef");
     const envRef = shallowRef();
     const groupRef = ref("groupRef");
@@ -52480,7 +52483,7 @@ const _sfc_main$6 = {
         ref_key: "groupRef",
         ref: groupRef
       }, [
-        props.envPath ? (openBlock(), createElementBlock("primitive", {
+        unref(env) !== void 0 ? (openBlock(), createElementBlock("primitive", {
           key: 0,
           ref_key: "envRef",
           ref: envRef,
