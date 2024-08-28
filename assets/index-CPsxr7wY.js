@@ -52632,7 +52632,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       turnOnAllPlanets
     });
     return (_ctx, _cache2) => {
-      return openBlock(), createBlock(unref(Lr), mergeProps({ "window-size": "" }, gl), {
+      return openBlock(), createBlock(unref(Lr), mergeProps({ "window-size": "" }, gl, { "clear-color": "#000000" }), {
         default: withCtx(() => [
           createVNode(_sfc_main$7, {
             planetName: planetToZoomInto.value,
