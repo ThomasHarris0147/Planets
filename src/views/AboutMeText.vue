@@ -27,6 +27,7 @@ p {
   border-radius: 25px;
   border: 2px solid #e8bcf0;
   animation: fadeIn 5s;
+  color: azure;
 }
 @keyframes fadeIn {
   0% {

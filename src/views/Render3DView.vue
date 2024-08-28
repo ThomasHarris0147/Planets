@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { OrbitControls, Stars } from '@tresjs/cientos'
+import { Stars } from '@tresjs/cientos'
 import { TresCanvas } from '@tresjs/core'
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 // @ts-ignore
@@ -7,6 +7,7 @@ import CameraObject from '../components/CameraObject.vue'
 // @ts-ignore
 import AllPlanets from '../components/AllPlanets.vue'
 import { ref } from 'vue'
+
 const props = defineProps({
   zoomInOnPlanet: { type: Boolean, required: false, default: false }
 })
@@ -37,7 +38,7 @@ defineExpose({
 })
 </script>
 <template>
-  <TresCanvas window-size v-bind="gl">
+  <TresCanvas window-size v-bind="gl" clear-color="#000000">
     <CameraObject
       :planetName="planetToZoomInto"
       :turnOnPlanetZoom="props.zoomInOnPlanet"
