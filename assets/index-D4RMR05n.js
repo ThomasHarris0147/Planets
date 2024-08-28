@@ -54598,7 +54598,7 @@ function extractChangingRecords(to2, from) {
   return [leavingRecords, updatingRecords, enteringRecords];
 }
 const _sfc_main$2 = {};
-const _withScopeId$2 = (n) => (pushScopeId("data-v-47f57c11"), n = n(), popScopeId(), n);
+const _withScopeId$2 = (n) => (pushScopeId("data-v-0ea40f3c"), n = n(), popScopeId(), n);
 const _hoisted_1$2 = { class: "textDisplay" };
 const _hoisted_2$2 = /* @__PURE__ */ _withScopeId$2(() => /* @__PURE__ */ createBaseVNode("p", null, [
   /* @__PURE__ */ createTextVNode(" Hello, my name is Thomas Saran Timmothy Harris. I am from here. I have been coding professionally now for about 2 years. If you wish to contact me, you can reach me through my "),
@@ -54615,9 +54615,9 @@ const _hoisted_3$2 = [
 function _sfc_render$2(_ctx, _cache2) {
   return openBlock(), createElementBlock("div", _hoisted_1$2, _hoisted_3$2);
 }
-const AboutMeText = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-47f57c11"]]);
+const AboutMeText = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-0ea40f3c"]]);
 const _sfc_main$1 = {};
-const _withScopeId$1 = (n) => (pushScopeId("data-v-afe2b26b"), n = n(), popScopeId(), n);
+const _withScopeId$1 = (n) => (pushScopeId("data-v-2b042847"), n = n(), popScopeId(), n);
 const _hoisted_1$1 = { class: "textDisplay" };
 const _hoisted_2$1 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ createBaseVNode("p", null, [
   /* @__PURE__ */ createTextVNode(" You can find my blog posts here. "),
@@ -54629,9 +54629,9 @@ const _hoisted_3$1 = [
 function _sfc_render$1(_ctx, _cache2) {
   return openBlock(), createElementBlock("div", _hoisted_1$1, _hoisted_3$1);
 }
-const BlogView = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-afe2b26b"]]);
+const BlogView = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-2b042847"]]);
 const _sfc_main = {};
-const _withScopeId = (n) => (pushScopeId("data-v-46cae743"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-684be3eb"), n = n(), popScopeId(), n);
 const _hoisted_1 = { class: "textDisplay" };
 const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("p", null, "I am currently working on some projects. You can visit some of them here!", -1));
 const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("ol", null, [
@@ -54651,7 +54651,7 @@ const _hoisted_4 = [
 function _sfc_render(_ctx, _cache2) {
   return openBlock(), createElementBlock("div", _hoisted_1, _hoisted_4);
 }
-const ProjectView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-46cae743"]]);
+const ProjectView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-684be3eb"]]);
 const router = createRouter({
   history: createWebHistory("/planets/"),
   routes: [
