@@ -1,6 +1,6 @@
 # planets
 
-This template should help get you started developing with Vue 3 in Vite.
+My planets website with Vue/Vite implementation.
 
 ## Recommended IDE Setup
 
@@ -26,10 +26,22 @@ pnpm install
 pnpm dev
 ```
 
+### Compile and Hot-Reload for Production Manual Testing
+
+```sh
+pnpm prd
+```
+
 ### Type-Check, Compile and Minify for Production
 
 ```sh
 pnpm build
+```
+
+### Checking production build
+
+```sh
+pnpm preview
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
